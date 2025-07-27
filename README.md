@@ -18,6 +18,16 @@ PocketMine-MP Alpha 1.3.10 is a server software for Minecraft Pocket Edition (v0
 - **🔧 Customizable**: Full control over server functions and customization
 - **📚 Comprehensive Documentation**: Extensive guides and API documentation
 
+## Enhanced Features
+
+This version includes several enhanced systems for improved gameplay:
+
+- **🛡️ Advanced Security System**: Anti-cheat protection and security monitoring
+- **🐾 Intelligent Mob AI**: Vanilla-like mob behavior with smooth movement
+- **🎒 Inventory Persistence**: Reliable inventory saving and loading
+- **👤 Player Identification**: Advanced player tracking and management
+- **🌍 Enhanced World Systems**: Improved world generation and management
+
 ## System Requirements
 
 ### Minimum Requirements
@@ -54,35 +64,39 @@ The following PHP extensions must be installed and enabled:
 #### Linux/macOS
 
 1. **Install PHP and required extensions:**
-   ```bash
-   # Ubuntu/Debian
-   sudo apt-get update
-   sudo apt-get install php5-cli php5-sockets php5-curl php5-sqlite3 php5-zlib php5-bcmath
-   
-   # CentOS/RHEL/Fedora
-   sudo yum install php-cli php-sockets php-curl php-sqlite3 php-zlib php-bcmath
-   
-   # macOS (using Homebrew)
-   brew install php
-   ```
+
+```bash
+# Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install php5-cli php5-sockets php5-curl php5-sqlite3 php5-zlib php5-bcmath
+
+# CentOS/RHEL/Fedora
+sudo yum install php-cli php-sockets php-curl php-sqlite3 php-zlib php-bcmath
+
+# macOS (using Homebrew)
+brew install php
+```
 
 2. **Download and extract PocketMine-MP Alpha 1.3.10:**
-   ```bash
-   # Download the specific version
-   wget https://github.com/TheCreateGM/PocketMine-MP-Alpha_1.3.10/blob/main/PocketMine-MP-Alpha_1.3.10.zip
-   unzip PocketMine-MP-Alpha_1.3.10.zip
-   cd PocketMine-MP-Alpha_1.3.10
-   ```
+
+```bash
+# Download the specific version
+wget https://github.com/TheCreateGM/PocketMine-MP-Alpha_1.3.10/blob/main/PocketMine-MP-Alpha_1.3.10.zip
+unzip PocketMine-MP-Alpha_1.3.10.zip
+cd PocketMine-MP-Alpha_1.3.10
+```
 
 3. **Make the start script executable:**
-   ```bash
-   chmod +x start.sh
-   ```
+
+```bash
+chmod +x start.sh
+```
 
 4. **Start the server:**
-   ```bash
-   ./start.sh
-   ```
+
+```bash
+./start.sh
+```
 
 #### Windows
 
@@ -93,13 +107,14 @@ The following PHP extensions must be installed and enabled:
 
 2. **Enable required extensions:**
    - Edit `php.ini` and uncomment the following lines:
-     ```ini
-     extension=sockets
-     extension=curl
-     extension=sqlite3
-     extension=zlib
-     extension=bcmath
-     ```
+
+```ini
+extension=sockets
+extension=curl
+extension=sqlite3
+extension=zlib
+extension=bcmath
+```
 
 3. **Download and extract PocketMine-MP Alpha 1.3.10:**
    - Download `PocketMine-MP-Alpha_1.3.10.zip` from [GitHub Releases](https://github.com/TheCreateGM/PocketMine-MP-Alpha_1.3.10/blob/main/PocketMine-MP-Alpha_1.3.10.zip)
@@ -107,9 +122,10 @@ The following PHP extensions must be installed and enabled:
    - Open Command Prompt in the PocketMine-MP-Alpha_1.3.10 folder
 
 4. **Start the server:**
-   ```cmd
-   start.cmd
-   ```
+
+```cmd
+start.cmd
+```
 
 ## Configuration
 
@@ -136,11 +152,13 @@ Plugins are stored in the `plugins/` directory. Each plugin may have its own con
 ### Starting the Server
 
 #### Linux/macOS
+
 ```bash
 ./start.sh
 ```
 
 #### Windows
+
 ```cmd
 start.cmd
 ```
@@ -159,6 +177,32 @@ Once the server is running, you can use various console commands:
 - `ban <player>` - Ban a player
 - `op <player>` - Give operator status
 - `deop <player>` - Remove operator status
+
+### Enhanced System Commands
+
+This version includes additional commands for the enhanced systems:
+
+#### Mob Management Commands
+
+- `/mobs stats` - Show mob statistics
+- `/mobs spawn <type> [x] [y] [z]` - Spawn a mob
+- `/mobs debug` - Show debug information
+- `/mobs test` - Spawn test mob and give items
+- `/mobs wake` - Wake up nearby mobs (force them to move)
+- `/mobs move` - Show movement status and AI states
+- `/mobs clear` - Remove all mobs
+
+#### Inventory Management Commands
+
+- `/inventory save [player]` - Save player inventory
+- `/inventory repair [player]` - Repair corrupted inventory
+- `/inventory stats` - Show inventory system statistics
+
+#### Security Commands
+
+- `/security status` - Show security system status
+- `/security violations [player]` - Show player violations
+- `/security reset [player]` - Reset player violation count
 
 ### Connecting to the Server
 
@@ -224,12 +268,23 @@ class Main extends PluginBase implements Listener {
 5. **"You must run PocketMine-MP using the CLI"**
    - Run the server from command line, not through a web server
 
+6. **Mob Movement Issues**
+   - Use `/mobs wake` to force mobs to start moving
+   - Check `/mobs debug` for nearby mob information
+   - Ensure mobs are spawning within 32 blocks of players
+
+7. **Inventory Loss Issues**
+   - The enhanced inventory system automatically saves every 30 seconds
+   - Use `/inventory repair` if inventory becomes corrupted
+   - Check server logs for inventory-related errors
+
 ### Performance Optimization
 
 - Increase `memory_limit` in php.ini for larger servers
 - Use SSD storage for better world loading performance
 - Optimize world generation settings
 - Use plugins sparingly to reduce overhead
+- Monitor mob spawning limits to prevent lag
 
 ## Directory Structure
 
@@ -237,18 +292,34 @@ class Main extends PluginBase implements Listener {
 PocketMine-MP-Alpha_1.3.10/
 ├── src/                    # Source code
 │   ├── API/               # Plugin API
+│   ├── entity/            # Entity and mob AI systems
 │   ├── material/          # Block and item definitions
 │   ├── world/             # World management
 │   ├── network/           # Network protocol
+│   ├── player/            # Player management systems
+│   ├── security/          # Security and anti-cheat
 │   ├── utils/             # Utility classes
 │   └── config.php         # Main configuration
 ├── plugins/               # Plugin directory
 ├── worlds/                # World data
 ├── players/               # Player data
+├── data/                  # Server data files
 ├── start.sh              # Linux/macOS start script
 ├── start.cmd             # Windows start script
-└── PocketMine-MP.php     # Main server file
+├── PocketMine-MP.php     # Main server file
+├── ENHANCED_FEATURES.md  # Enhanced features documentation
+└── README.md             # This file
 ```
+
+## Enhanced Systems Documentation
+
+For detailed information about the enhanced systems included in this version, see:
+
+- **[ENHANCED_FEATURES.md](ENHANCED_FEATURES.md)** - Complete documentation of all enhanced features
+- **Security System**: Advanced anti-cheat and player monitoring
+- **Mob AI System**: Intelligent mob behavior and movement
+- **Inventory Persistence**: Reliable item saving and loading
+- **Player Identification**: Advanced player tracking
 
 ## License
 
@@ -292,4 +363,29 @@ PocketMine-MP uses the following third-party libraries:
 - **Required PHP Version**: 5.4.0+
 - **Recommended PHP Version**: 5.5+
 - **Memory Limit**: 128MB default
-- **License**: LGPL-3.0 
+- **License**: LGPL-3.0
+
+## Changelog
+
+### Enhanced Features Added
+
+- ✅ **Advanced Security System** - Anti-cheat protection and monitoring
+- ✅ **Intelligent Mob AI** - Vanilla-like mob behavior with smooth movement
+- ✅ **Inventory Persistence Fix** - Reliable inventory saving and loading
+- ✅ **Player Identification System** - Advanced player tracking
+- ✅ **Enhanced Console Commands** - Additional management commands
+- ✅ **Performance Optimizations** - Improved server stability and performance
+- ✅ **Bug Fixes** - Resolved chunk loading and entity management issues
+
+### Technical Improvements
+
+- Fixed "Undefined array key" errors in Player.php
+- Implemented Bedrock-style mob movement system
+- Added precision error handling for entity coordinates
+- Enhanced inventory validation and recovery mechanisms
+- Improved mob spawning and AI initialization
+- Added comprehensive debugging and monitoring tools
+
+---
+
+**Note**: This enhanced version maintains full compatibility with the original PocketMine-MP Alpha 1.3.10 while adding significant improvements to gameplay, stability, and server management capabilities.
